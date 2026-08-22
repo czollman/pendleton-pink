@@ -153,6 +153,7 @@ input:focus,select:focus{border-color:var(--pink)}
 .prize-qty{display:inline-block;background:var(--pink-pale);color:var(--pink-deep);font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:2px}
 .prize-total{margin-top:16px;padding-top:14px;border-top:2px solid var(--pink);font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
 .prize-total strong{color:var(--pink-deep)}
+.deadline-note{font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pink-deep);margin:-6px 0 16px}
 .raffle-where{margin-top:18px;background:var(--pink-pale);border-left:4px solid var(--pink);padding:14px 16px;font-size:.84rem;line-height:1.65}
 .raffle-where strong{color:var(--pink-deep)}
 .pay-step{display:none;margin-top:18px;background:var(--white);border:2px solid var(--pink);padding:18px 16px}
@@ -357,7 +358,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
       <p class="s-label">Win Big · Give Big</p>
       <h2 class="s-title">20th Anniversary<br><em>Raffle</em></h2>
       <div class="s-rule"></div>
-      <p>Six prizes worth more than $1,780, donated by our community partners. Tickets are $5 each or 3 for $12, and every dollar stays in Eastern Oregon. Winners are drawn Thursday afternoon, September 17 at the Round-Up grounds &mdash; you do not need to be present to win.</p>
+      <p>Six prizes worth more than $1,780, donated by our community partners. Tickets are $5 each or 3 for $12, and every dollar stays in Eastern Oregon. Online sales close Wednesday, September 16 &mdash; after that, find us at the TETWP booths at the Round-Up. Winners are drawn Thursday afternoon, September 17 at the rodeo, and you do not need to be present to win.</p>
     </div>
     <div class="raffle-layout">
       <div class="reveal" style="transition-delay:.1s">
@@ -369,13 +370,22 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
         <div class="prize-total">Six prizes · <strong>More than $1,780</strong> in donated value</div>
         <div class="raffle-where">
           <strong>Tickets:</strong> $5 each, or 3 for $12.<br>
-          <strong>Where to buy:</strong> online right here, or at the TETWP booths at the Round-Up on Thursday, September 17.<br>
-          <strong>Drawing:</strong> Thursday afternoon, September 17, at the Pendleton Round-Up Grounds. <em>You do not need to be present to win.</em>
+          <strong>Online sales close:</strong> Wednesday, September 16.<br>
+          <strong>In person:</strong> at the TETWP booths at the rodeo on Thursday, September 17.<br>
+          <strong>Drawing:</strong> Thursday afternoon, September 17, at the rodeo. <em>You do not need to be present to win.</em>
         </div>
       </div>
       <div class="raffle-form reveal" style="transition-delay:.2s">
         <div class="form-title">🎟 Get Your Tickets</div>
         <div class="ticket-price-tag">$5 each &nbsp;·&nbsp; 3 for $12</div>
+        <div class="deadline-note" id="deadlineNote">Online sales close Wednesday, September 16</div>
+        <!-- SALES CLOSED: shown automatically once the online deadline passes. -->
+        <div id="salesClosed" style="display:none">
+          <p class="pay-line"><strong>Online ticket sales are now closed.</strong></p>
+          <p class="pay-line">Tickets are still available in person at the TETWP booths at the Pendleton Round-Up on Thursday, September 17. The drawing is Thursday afternoon at the rodeo — you do not need to be present to win.</p>
+          <p class="form-note">Still want to support the campaign? Donations are welcome any time through <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a>.</p>
+        </div>
+
         <!-- SQUARE CHECKOUT: shown only when SQUARE_RAFFLE_LINK is set in the script below. -->
         <div id="squareBox" style="display:none">
           <p class="pay-line">Pick your tickets and check out securely with Square. Card, Apple Pay, and Google Pay accepted — your ticket numbers are emailed to you automatically.</p>
@@ -417,7 +427,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
         </div>
         </div>
 
-        <p class="form-note" id="formFootnote">Payment is handled by PayPal or Venmo — we never see or store your card details. Tickets are also sold at the TETWP booths at the Round-Up on September 17. 100% of proceeds benefit local Eastern Oregon cancer organizations.</p>
+        <p class="form-note" id="formFootnote">Payment is handled by PayPal or Venmo — we never see or store your card details. Tickets are also sold in person at the TETWP booths at the rodeo on September 17. 100% of proceeds benefit local Eastern Oregon cancer organizations.</p>
       </div>
     </div>
   </div>
@@ -627,14 +637,31 @@ function selAmt(b){document.querySelectorAll('.amt-btn').forEach(x=>x.classList.
    Leave it empty to keep the PayPal / Venmo flow.                        */
 const SQUARE_RAFFLE_LINK='';
 
+/* Online sales end after Wednesday, September 16 2026, Pacific time
+   (Pendleton is UTC-7 in September). Once this passes, the purchase form is
+   replaced with the in-person notice. To reopen sales, push the date out. */
+const ONLINE_SALES_CLOSE=new Date('2026-09-17T00:00:00-07:00');
+
 (function initCheckout(){
+  const closed=new Date()>=ONLINE_SALES_CLOSE;
+
+  if(closed){
+    document.getElementById('salesClosed').style.display='block';
+    document.getElementById('squareBox').style.display='none';
+    document.getElementById('manualBox').style.display='none';
+    document.getElementById('deadlineNote').style.display='none';
+    document.getElementById('formFootnote').textContent=
+      '100% of proceeds benefit local Eastern Oregon cancer organizations.';
+    return;
+  }
+
   if(!SQUARE_RAFFLE_LINK) return;
   document.getElementById('squareBtn').href=SQUARE_RAFFLE_LINK;
   document.getElementById('squareBox').style.display='block';
   document.getElementById('manualBox').style.display='none';
   document.getElementById('formFootnote').textContent=
     'Checkout is handled by Square — we never see or store your card details. '
-    +'Tickets are also sold at the TETWP booths at the Round-Up on September 17. '
+    +'Tickets are also sold in person at the TETWP booths at the rodeo on September 17. '
     +'100% of proceeds benefit local Eastern Oregon cancer organizations.';
 })();
 
