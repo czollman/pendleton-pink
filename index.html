@@ -189,6 +189,10 @@ input:focus,select:focus{border-color:var(--pink)}
 .pay-line{font-size:.8rem;line-height:1.6;margin-bottom:10px}
 .pay-ref{background:var(--pink-pale);border:1px dashed var(--pink);padding:11px 10px;font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.03em;color:var(--brown);cursor:pointer;word-break:break-word;text-align:center;margin-bottom:6px}
 .pay-step .btn{width:100%;text-align:center;display:block;margin-top:9px;padding:13px 18px;font-size:.78rem}
+.square-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.square-btns .btn{width:100%;text-align:center;display:block}
+.square-btns .sq-alt{border-color:var(--pink);color:var(--pink-deep)}
+.square-btns .sq-alt:hover{border-color:var(--pink-deep);color:var(--pink-deep)}
 .btn-paypal{background:#003087;color:#fff;border:none;cursor:pointer}
 .btn-paypal:hover{background:#001c4e;transform:translateY(-2px)}
 .btn-venmo{background:#008CFF;color:#fff;border:none;cursor:pointer}
@@ -325,10 +329,10 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
           <p class="form-note">Still want to support the campaign? Donations are welcome any time through <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a>.</p>
         </div>
 
-        <!-- SQUARE CHECKOUT: shown only when SQUARE_RAFFLE_LINK is set in the script below. -->
+        <!-- SQUARE CHECKOUT: shown only when SQUARE_RAFFLE_LINKS has entries in the script below. -->
         <div id="squareBox" style="display:none">
-          <p class="pay-line">Pick your tickets and check out securely with Square. Card, Apple Pay, and Google Pay accepted — your ticket numbers are emailed to you automatically.</p>
-          <a href="#" id="squareBtn" target="_blank" rel="noopener" class="btn btn-pink" style="width:100%;text-align:center;display:block">Buy Raffle Tickets →</a>
+          <p class="pay-line">Check out securely with Square — card, Apple Pay, and Google Pay accepted. Square emails your receipt, and we follow up with your ticket numbers before the drawing.</p>
+          <div id="squareBtns" class="square-btns"></div>
           <p class="form-note">Prefer to send it yourself? Use <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a> and put your name and ticket count in the note.</p>
         </div>
 
@@ -704,11 +708,15 @@ const TETWP_PRODUCTS=[];
 })();
 
 /* ── RAFFLE CHECKOUT ──────────────────────────────────────────────────────
-   Paste the Square payment link between the quotes to move raffle ticket
-   sales onto Square. Square then collects the buyer's name, email and
-   ticket count, so the manual form below is hidden automatically.
-   Leave it empty to keep the PayPal / Venmo flow.                        */
-const SQUARE_RAFFLE_LINK='';
+   Add one entry per Square payment link to move raffle ticket sales onto
+   Square. Square then collects the buyer's name, email and ticket count,
+   so the manual form below is hidden automatically. The first entry is the
+   primary button and any others render as secondary ones. Leave the list
+   empty to keep the PayPal / Venmo flow.                                 */
+const SQUARE_RAFFLE_LINKS=[
+  // {label:'1 Ticket — $5',   url:'https://square.link/u/XXXXXXXX'},
+  // {label:'3 Tickets — $12', url:'https://square.link/u/YYYYYYYY'},
+];
 
 /* Online sales end after Wednesday, September 16 2026, Pacific time
    (Pendleton is UTC-7 in September). Once this passes, the purchase form is
@@ -729,8 +737,11 @@ const ONLINE_SALES_CLOSE=new Date('2026-09-17T00:00:00-07:00');
     return;
   }
 
-  if(!SQUARE_RAFFLE_LINK) return;
-  document.getElementById('squareBtn').href=SQUARE_RAFFLE_LINK;
+  const links=SQUARE_RAFFLE_LINKS.filter(l=>l&&l.url);
+  if(!links.length) return;
+  document.getElementById('squareBtns').innerHTML=links.map((l,i)=>
+    '<a class="btn '+(i?'btn-outline sq-alt':'btn-pink')+'" href="'+l.url+'"'
+    +' target="_blank" rel="noopener">'+l.label+' →</a>').join('');
   document.getElementById('squareBox').style.display='block';
   document.getElementById('manualBox').style.display='none';
   document.getElementById('formFootnote').textContent=
