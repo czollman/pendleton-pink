@@ -93,8 +93,6 @@ section{padding:76px 24px}
 .s-rule{width:60px;height:3px;background:var(--pink);margin-bottom:30px}
 p{line-height:1.75;margin-bottom:14px;color:#5a3520}
 
-
-
 /* IMPACT - dark */
 .impact{background:var(--brown)}
 .impact .s-title{color:var(--cream)}
@@ -334,44 +332,10 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
           <p class="pay-line">Check out securely with Square — card, Apple Pay, and Google Pay accepted.</p>
           <p class="pay-line">Pick a bundle, then choose how many you want on the next page. Four 3-packs is 12 tickets for $48.</p>
           <div id="squareBtns" class="square-btns"></div>
-          <p class="form-note">Square emails your receipt; we follow up with your ticket numbers before the drawing. Prefer to send it yourself? Use <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a> and put your name and ticket count in the note.</p>
+          <p class="form-note">Square emails your receipt, and we follow up with your ticket numbers before the drawing.</p>
         </div>
 
-        <!-- MANUAL PAYPAL / VENMO FLOW -->
-        <div id="manualBox">
-        <div class="form-group"><label for="fn">First Name *</label><input type="text" id="fn" placeholder="Jane" required></div>
-        <div class="form-group"><label for="ln">Last Name *</label><input type="text" id="ln" placeholder="Smith" required></div>
-        <div class="form-group"><label for="em">Email Address *</label><input type="email" id="em" placeholder="jane@example.com" required></div>
-        <div class="form-group"><label for="ph">Phone Number</label><input type="tel" id="ph" placeholder="(509) 555-0100"></div>
-        <div class="form-group">
-          <label for="qty">Number of Tickets *</label>
-          <select id="qty" onchange="updTotal()">
-            <option value="1" data-price="5">1 ticket — $5</option>
-            <option value="2" data-price="10">2 tickets — $10</option>
-            <option value="3" data-price="12" selected>3 tickets — $12 (best value)</option>
-            <option value="6" data-price="24">6 tickets — $24</option>
-            <option value="9" data-price="36">9 tickets — $36</option>
-            <option value="12" data-price="48">12 tickets — $48</option>
-            <option value="15" data-price="60">15 tickets — $60</option>
-            <option value="30" data-price="120">30 tickets — $120</option>
-          </select>
-        </div>
-        <div class="total-box"><div class="total-lbl">Your Total</div><div class="total-amt" id="totalAmt">$12.00</div></div>
-        <button class="btn btn-pink" onclick="submitRaffle()" style="width:100%;text-align:center">Continue to Payment →</button>
-
-        <div class="pay-step" id="payStep">
-          <div class="pay-head">Step 2 · Send Your Payment</div>
-          <div class="pay-line">Send <strong id="payAmt">$12.00</strong> using PayPal or Venmo, and paste this reference in the payment note so we can match your tickets to you:</div>
-          <div class="pay-ref" id="payRef" onclick="copy(this.textContent.trim())" title="Click to copy"></div>
-          <div class="handle-hint" style="text-align:center;margin-bottom:12px">↑ tap to copy</div>
-          <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" class="btn btn-paypal">Pay with PayPal →</a>
-          <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" class="btn btn-venmo">Pay with Venmo →</a>
-          <a href="#" id="payEmail" class="btn btn-dark">Email Us Your Entry Details →</a>
-          <p class="form-note">Already paid? Tap "Email Us Your Entry Details" so we have your contact information on file. We'll confirm your ticket numbers by email, and we'll call you if you win.</p>
-        </div>
-        </div>
-
-        <p class="form-note" id="formFootnote">Payment is handled by PayPal or Venmo — we never see or store your card details. Tickets are also sold in person at the TETWP booths at the Pendleton Round-Up Grounds on September 17. 100% of proceeds benefit local Eastern Oregon cancer organizations.</p>
+        <p class="form-note" id="formFootnote">Checkout is handled by Square — we never see or store your card details. Tickets are also sold in person, cash or card, at the TETWP booths at the Pendleton Round-Up Grounds on September 17. 100% of proceeds benefit local Eastern Oregon cancer organizations.</p>
       </div>
     </div>
   </div>
@@ -391,7 +355,6 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
   <div class="photo-overlay"></div>
   <div class="photo-cap">20 Years of Volunteers. <span>One Community. One Fight.</span></div>
 </div>
-
 
 <!-- DONATE -->
 
@@ -726,11 +689,13 @@ const ONLINE_SALES_CLOSE=new Date('2026-09-17T00:00:00-07:00');
 
 (function initCheckout(){
   const closed=new Date()>=ONLINE_SALES_CLOSE;
+  const links=SQUARE_RAFFLE_LINKS.filter(l=>l&&l.url);
 
-  if(closed){
+  // Past the deadline, or with no links configured, there is no online sale
+  // to offer — point people at the booth instead.
+  if(closed||!links.length){
     document.getElementById('salesClosed').style.display='block';
     document.getElementById('squareBox').style.display='none';
-    document.getElementById('manualBox').style.display='none';
     document.getElementById('deadlineNote').style.display='none';
     document.getElementById('formFootnote').textContent=
       'Booth sales are cash or card. '
@@ -738,63 +703,12 @@ const ONLINE_SALES_CLOSE=new Date('2026-09-17T00:00:00-07:00');
     return;
   }
 
-  const links=SQUARE_RAFFLE_LINKS.filter(l=>l&&l.url);
-  if(!links.length) return;
   document.getElementById('squareBtns').innerHTML=links.map((l,i)=>
     '<a class="btn '+(i?'btn-outline sq-alt':'btn-pink')+'" href="'+l.url+'"'
     +' target="_blank" rel="noopener">'+l.label+' →</a>').join('');
   document.getElementById('squareBox').style.display='block';
-  document.getElementById('manualBox').style.display='none';
-  document.getElementById('formFootnote').textContent=
-    'Checkout is handled by Square — we never see or store your card details. '
-    +'Tickets are also sold in person at the TETWP booths at the Pendleton Round-Up Grounds on September 17. '
-    +'100% of proceeds benefit local Eastern Oregon cancer organizations.';
 })();
 
-// Raffle total
-function ticketPrice(){
-  const s=document.getElementById('qty');
-  return parseInt(s.options[s.selectedIndex].dataset.price,10);
-}
-function updTotal(){
-  document.getElementById('totalAmt').textContent='$'+ticketPrice()+'.00';
-  // Keep an already-open payment step in sync if the quantity changes.
-  if(document.getElementById('payStep').classList.contains('on')) submitRaffle();
-}
-
-// Raffle submit — builds the payment reference, then reveals the pay step.
-function submitRaffle(){
-  const fn=document.getElementById('fn').value.trim();
-  const ln=document.getElementById('ln').value.trim();
-  const em=document.getElementById('em').value.trim();
-  const ph=document.getElementById('ph').value.trim();
-  if(!fn||!ln||!em){alert('Please fill in your name and email to continue.');return;}
-
-  const qty=document.getElementById('qty').value;
-  const price=ticketPrice();
-  const ref='TETWP 2026 Raffle · '+qty+' tickets · '+fn+' '+ln;
-
-  document.getElementById('payAmt').textContent='$'+price+'.00';
-  document.getElementById('payRef').textContent=ref;
-
-  const subject='TETWP 2026 Raffle Tickets — '+fn+' '+ln;
-  const body='Raffle ticket entry\n\n'
-    +'Name: '+fn+' '+ln+'\n'
-    +'Email: '+em+'\n'
-    +'Phone: '+(ph||'(not provided)')+'\n'
-    +'Tickets: '+qty+'\n'
-    +'Amount: $'+price+'.00\n'
-    +'Payment note used: '+ref+'\n\n'
-    +'Paid via (circle one): PayPal / Venmo\n';
-  document.getElementById('payEmail').href='mailto:cmwzollman@gmail.com'
-    +'?cc=jill.c.gregg@gmail.com'
-    +'&subject='+encodeURIComponent(subject)
-    +'&body='+encodeURIComponent(body);
-
-  const step=document.getElementById('payStep');
-  step.classList.add('on');
-  step.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
 </script>
 
 <!-- PRIVACY POLICY MODAL -->
@@ -808,14 +722,14 @@ function submitRaffle(){
     <p>This website is operated by the Tough Enough To Wear Pink (TETWP) Pendleton Round-Up Campaign, a volunteer-led breast cancer fundraising initiative based in Pendleton, Oregon. Campaign co-chairs: Casey White-Zollman and Jill Gregg.</p>
 
     <h3>Information We Collect</h3>
-    <p>When you fill in the raffle ticket form on this site, you may enter:</p>
+    <p>This website itself does not collect or store anything you type. Raffle tickets are sold through Square's secure checkout, which is where you enter:</p>
     <ul>
-      <li>Your name, email address, and phone number</li>
-      <li>The number of raffle tickets requested</li>
-      <li>Any message or note you choose to include</li>
+      <li>Your name and phone number, for the raffle entry</li>
+      <li>Your email address, for your receipt</li>
+      <li>The number of tickets purchased</li>
     </ul>
-    <p>What you type into the raffle form stays in your own web browser. We use it only to build your payment reference and, if you choose to send it, a pre-filled email to our campaign co-chairs. Nothing is transmitted to us unless you send that email or include your name in your payment note.</p>
-    <p>We do <strong>not</strong> collect payment card numbers or banking information. All payments are processed externally through PayPal or Venmo, subject to their respective privacy policies.</p>
+    <p>That information goes to Square and is visible to our campaign co-chairs in the Square dashboard. We use it to record your entry, confirm your ticket numbers, and contact you if you win.</p>
+    <p>We do <strong>not</strong> collect or see payment card numbers or banking information. Card details are handled entirely by Square. Donations sent through PayPal or Venmo are subject to those services' own privacy policies.</p>
 
     <h3>How We Use Your Information</h3>
     <ul>
@@ -826,14 +740,14 @@ function submitRaffle(){
     </ul>
 
     <h3>How We Store Your Information</h3>
-    <p>This website does not run a database. Information reaches us only through email you send us, or through the note attached to your PayPal or Venmo payment. Those records are kept by the campaign co-chairs and used solely to confirm raffle tickets, contact winners, and thank donors. We do not sell, rent, or share your personal information with third parties for marketing purposes. Sponsor and volunteer contact information is used solely for campaign coordination.</p>
-    <p>Please note that a note attached to a Venmo payment may be visible to others depending on your Venmo privacy settings, so we suggest including only your name and ticket count.</p>
+    <p>This website does not run a database of its own. Raffle records live in our Square account, and are used solely to confirm raffle tickets, contact winners, and thank donors. We do not sell, rent, or share your personal information with third parties for marketing purposes. Sponsor and volunteer contact information is used solely for campaign coordination.</p>
 
     <h3>Third-Party Payment Processors</h3>
-    <p>Donations and raffle ticket payments are processed through PayPal and Venmo. When you click through to those platforms, their own privacy policies apply. We encourage you to review:</p>
+    <p>Raffle ticket purchases are processed through Square. Donations are processed through PayPal or Venmo. When you click through to any of those platforms, their own privacy policies apply. We encourage you to review:</p>
     <ul>
-      <li><a href="https://www.paypal.com/us/legalhub/privacy-full" target="_blank" style="color:var(--pink)">PayPal Privacy Policy</a></li>
-      <li><a href="https://venmo.com/legal/us-privacy-policy/" target="_blank" style="color:var(--pink)">Venmo Privacy Policy</a></li>
+      <li><a href="https://squareup.com/us/en/legal/general/privacy" target="_blank" rel="noopener" style="color:var(--pink)">Square Privacy Notice</a></li>
+      <li><a href="https://www.paypal.com/us/legalhub/privacy-full" target="_blank" rel="noopener" style="color:var(--pink)">PayPal Privacy Policy</a></li>
+      <li><a href="https://venmo.com/legal/us-privacy-policy/" target="_blank" rel="noopener" style="color:var(--pink)">Venmo Privacy Policy</a></li>
     </ul>
 
     <h3>Cookies</h3>
