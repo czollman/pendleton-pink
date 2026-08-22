@@ -173,6 +173,8 @@ input:focus,select:focus{border-color:var(--pink)}
 .prize>div:nth-child(2){flex:1 1 auto;min-width:0}
 .prize-thumb{width:92px;height:92px;object-fit:cover;border:1px solid var(--tan-light);flex:0 0 auto;background:var(--cream);display:block}
 .prize-thumb.contain{object-fit:contain;padding:5px;background:var(--white)}
+.prize-buy{display:inline-block;margin-top:7px;font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:var(--pink);padding:5px 12px;text-decoration:none;transition:background .15s}
+.prize-buy:hover{background:var(--pink-deep)}
 @media(max-width:560px){.prize-thumb{width:64px;height:64px}}
 @media(max-width:560px){.prize-v{white-space:normal;text-align:right;max-width:5.2em;line-height:1.35}}
 .prize-qty{display:inline-block;background:var(--pink-pale);color:var(--pink-deep);font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:2px}
@@ -622,6 +624,42 @@ function copy(t){
 // Amount btns
 function selAmt(b){document.querySelectorAll('.amt-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
 
+/* ── PER-PRIZE TICKET LINKS ──────────────────────────────────────────────
+   This raffle draws per prize: each prize has its own bucket and buyers
+   choose which one their tickets go toward. Point each key at that prize's
+   product page in the Square Online store and a "Buy tickets" link appears
+   on that row. Keys match the data-prize attributes in the prize list, and
+   any key left out simply shows no link.                                 */
+function prizeName(row){
+  const d=row.querySelector('.prize-d');
+  if(!d) return '';
+  const c=d.cloneNode(true);
+  c.querySelectorAll('.prize-qty').forEach(e=>e.remove());
+  c.querySelectorAll('br').forEach(e=>e.replaceWith(' '));
+  return c.textContent.replace(/\s+/g,' ').trim();
+}
+
+const PRIZE_LINKS={
+  // cooler: 'https://…square.site/product/…',
+  // bottle: '',
+  // buckle: '',
+  // purse:  '',
+  // hat:    '',
+};
+
+(function renderPrizeLinks(){
+  for(const [key,url] of Object.entries(PRIZE_LINKS)){
+    if(!url) continue;
+    const row=document.querySelector('.prize[data-prize="'+key+'"]');
+    if(!row) continue;
+    const a=document.createElement('a');
+    a.className='prize-buy'; a.href=url; a.target='_blank'; a.rel='noopener';
+    a.textContent='Buy tickets →';
+    a.setAttribute('aria-label','Buy raffle tickets for '+prizeName(row));
+    (row.querySelector('.prize-d')||row).parentNode.appendChild(a);
+  }
+})();
+
 /* ── RAFFLE PRIZE PHOTOS ─────────────────────────────────────────────────
    Drop the prize images into the images/ folder and list them here. Each
    key matches a data-prize attribute on a row in the raffle prize list.
@@ -645,7 +683,7 @@ const PRIZE_IMAGES={
     if(!row) continue;
     const img=document.createElement('img');
     img.className='prize-thumb'+(contain?' contain':''); img.src=src; img.loading='lazy';
-    img.alt=(row.querySelector('.prize-d')||{textContent:''}).textContent.trim();
+    img.alt=prizeName(row);
     row.insertBefore(img,row.children[1]);
   }
 })();
