@@ -322,6 +322,13 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
         <div class="form-title">🎟 Get Your Tickets</div>
         <div class="ticket-price-tag">$5 each &nbsp;·&nbsp; 3 for $12</div>
         <div class="deadline-note" id="deadlineNote">Online sales close Wednesday, September 16</div>
+        <!-- NOT OPEN YET: shown when no store links are configured. -->
+        <div id="salesPending" style="display:none">
+          <p class="pay-line"><strong>Online ticket sales open soon.</strong></p>
+          <p class="pay-line">Tickets will be on sale right here shortly. You will be able to choose which prize you are entering for, and buy for more than one in a single checkout.</p>
+          <p class="form-note">Tickets are also sold in person, cash or card, at the TETWP booths at the Pendleton Round-Up Grounds on Thursday, September 17.</p>
+        </div>
+
         <!-- SALES CLOSED: shown automatically once the online deadline passes. -->
         <div id="salesClosed" style="display:none">
           <p class="pay-line"><strong>Online ticket sales are now closed.</strong></p>
@@ -332,7 +339,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
         <!-- SQUARE CHECKOUT: shown only when SQUARE_RAFFLE_LINKS has entries in the script below. -->
         <div id="squareBox" style="display:none">
           <p class="pay-line">Check out securely with Square — card, Apple Pay, and Google Pay accepted.</p>
-          <p class="pay-line">Pick a bundle, then choose how many you want on the next page. Four 3-packs is 12 tickets for $48.</p>
+          <p class="pay-line">Choose which prize you are entering for, then pick 1 ticket ($5) or 3 tickets ($12) and how many you want. You can enter for more than one prize in the same checkout.</p>
           <div id="squareBtns" class="square-btns"></div>
           <p class="form-note">Square emails your receipt, and we follow up with your ticket numbers before the drawing.</p>
         </div>
@@ -710,14 +717,13 @@ const TETWP_PRODUCTS=[];
 })();
 
 /* ── RAFFLE CHECKOUT ──────────────────────────────────────────────────────
-   Add one entry per Square payment link to move raffle ticket sales onto
-   Square. Square then collects the buyer's name, email and ticket count,
-   so the manual form below is hidden automatically. The first entry is the
-   primary button and any others render as secondary ones. Leave the list
-   empty to keep the PayPal / Venmo flow.                                 */
+   Links to the Square Online store where raffle tickets are sold. Usually
+   one entry pointing at the store front page; add more if a second entry
+   point is ever useful. The first is the primary button, the rest render
+   as secondary ones. While this list is empty the section shows the
+   "sales open soon" notice instead.                                      */
 const SQUARE_RAFFLE_LINKS=[
-  {label:'3 Tickets — $12', url:'https://square.link/u/bgmj032b'},
-  {label:'1 Ticket — $5',   url:'https://square.link/u/AaKny7kc'},
+  // {label:'Buy Raffle Tickets', url:'https://….square.site/'},
 ];
 
 /* Online sales end after Wednesday, September 16 2026, Pacific time
@@ -729,15 +735,15 @@ const ONLINE_SALES_CLOSE=new Date('2026-09-17T00:00:00-07:00');
   const closed=new Date()>=ONLINE_SALES_CLOSE;
   const links=SQUARE_RAFFLE_LINKS.filter(l=>l&&l.url);
 
-  // Past the deadline, or with no links configured, there is no online sale
-  // to offer — point people at the booth instead.
+  // After the deadline sales are over; before the store is linked they have
+  // not started. Those are different messages, so keep them apart.
   if(closed||!links.length){
-    document.getElementById('salesClosed').style.display='block';
+    document.getElementById(closed?'salesClosed':'salesPending').style.display='block';
     document.getElementById('squareBox').style.display='none';
-    document.getElementById('deadlineNote').style.display='none';
+    if(closed) document.getElementById('deadlineNote').style.display='none';
+    // Both notices already cover the booth, so keep the footnote short.
     document.getElementById('formFootnote').textContent=
-      'Booth sales are cash or card. '
-      +'100% of proceeds benefit local Eastern Oregon cancer organizations.';
+      '100% of proceeds benefit local Eastern Oregon cancer organizations.';
     return;
   }
 
