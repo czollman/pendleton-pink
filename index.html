@@ -173,9 +173,9 @@ input:focus,select:focus{border-color:var(--pink)}
 .form-note{font-size:.76rem;color:#8a6040;font-style:italic;margin-top:10px;line-height:1.5}
 .prize-v{margin-left:auto;font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.05em;color:var(--pink-deep);white-space:nowrap;padding-top:4px}
 .prize>div:nth-child(2){flex:1 1 auto;min-width:0}
-.prize-thumb{width:62px;height:62px;object-fit:cover;border:1px solid var(--tan-light);flex:0 0 auto;background:var(--cream);display:block}
+.prize-thumb{width:92px;height:92px;object-fit:cover;border:1px solid var(--tan-light);flex:0 0 auto;background:var(--cream);display:block}
 .prize-thumb.contain{object-fit:contain;padding:5px;background:var(--white)}
-@media(max-width:560px){.prize-thumb{width:48px;height:48px}}
+@media(max-width:560px){.prize-thumb{width:64px;height:64px}}
 @media(max-width:560px){.prize-v{white-space:normal;text-align:right;max-width:5.2em;line-height:1.35}}
 .prize-qty{display:inline-block;background:var(--pink-pale);color:var(--pink-deep);font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:2px}
 .prize-total{margin-top:16px;padding-top:14px;border-top:2px solid var(--pink);font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
@@ -659,12 +659,12 @@ function selAmt(b){document.querySelectorAll('.amt-btn').forEach(x=>x.classList.
    key matches a data-prize attribute on a row in the raffle prize list.
    Any key left out simply shows no thumbnail, so partial sets are fine.  */
 const PRIZE_IMAGES={
-  // cooler: 'images/cooler.jpg',
-  // bottle: 'images/whisky-bottle.jpg',
-  // buckle: 'images/buckle.jpg',
-  // purse:  'images/purse.jpg',
-  // A logo should be fitted whole rather than cropped square like a photo:
-  // hat:    {src:'images/pendleton-hat-co.png', contain:true},
+  cooler: 'images/cooler.jpg',
+  bottle: 'images/whisky-bottle.jpg',
+  buckle: 'images/buckle.jpg',
+  purse:  'images/purse.jpg',
+  // A logo is fitted whole rather than cropped square like a photo:
+  hat:    {src:'images/pendleton-hat-co.png', contain:true},
 };
 
 (function renderPrizeImages(){
