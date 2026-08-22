@@ -376,7 +376,15 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
       <div class="raffle-form reveal" style="transition-delay:.2s">
         <div class="form-title">🎟 Get Your Tickets</div>
         <div class="ticket-price-tag">$5 each &nbsp;·&nbsp; 3 for $12</div>
-        <!-- GHL FORM EMBED GOES HERE — replace the form fields below with your GHL embed script -->
+        <!-- SQUARE CHECKOUT: shown only when SQUARE_RAFFLE_LINK is set in the script below. -->
+        <div id="squareBox" style="display:none">
+          <p class="pay-line">Pick your tickets and check out securely with Square. Card, Apple Pay, and Google Pay accepted — your ticket numbers are emailed to you automatically.</p>
+          <a href="#" id="squareBtn" target="_blank" rel="noopener" class="btn btn-pink" style="width:100%;text-align:center;display:block">Buy Raffle Tickets →</a>
+          <p class="form-note">Prefer to send it yourself? Use <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a> and put your name and ticket count in the note.</p>
+        </div>
+
+        <!-- MANUAL PAYPAL / VENMO FLOW -->
+        <div id="manualBox">
         <div class="form-group"><label for="fn">First Name *</label><input type="text" id="fn" placeholder="Jane" required></div>
         <div class="form-group"><label for="ln">Last Name *</label><input type="text" id="ln" placeholder="Smith" required></div>
         <div class="form-group"><label for="em">Email Address *</label><input type="email" id="em" placeholder="jane@example.com" required></div>
@@ -407,8 +415,9 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
           <a href="#" id="payEmail" class="btn btn-dark">Email Us Your Entry Details →</a>
           <p class="form-note">Already paid? Tap "Email Us Your Entry Details" so we have your contact information on file. We'll confirm your ticket numbers by email, and we'll call you if you win.</p>
         </div>
+        </div>
 
-        <p class="form-note">Payment is handled by PayPal or Venmo — we never see or store your card details. Tickets are also sold at the TETWP booths at the Round-Up on September 17. 100% of proceeds benefit local Eastern Oregon cancer organizations.</p>
+        <p class="form-note" id="formFootnote">Payment is handled by PayPal or Venmo — we never see or store your card details. Tickets are also sold at the TETWP booths at the Round-Up on September 17. 100% of proceeds benefit local Eastern Oregon cancer organizations.</p>
       </div>
     </div>
   </div>
@@ -610,6 +619,24 @@ function copy(t){
 
 // Amount btns
 function selAmt(b){document.querySelectorAll('.amt-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+
+/* ── RAFFLE CHECKOUT ──────────────────────────────────────────────────────
+   Paste the Square payment link between the quotes to move raffle ticket
+   sales onto Square. Square then collects the buyer's name, email and
+   ticket count, so the manual form below is hidden automatically.
+   Leave it empty to keep the PayPal / Venmo flow.                        */
+const SQUARE_RAFFLE_LINK='';
+
+(function initCheckout(){
+  if(!SQUARE_RAFFLE_LINK) return;
+  document.getElementById('squareBtn').href=SQUARE_RAFFLE_LINK;
+  document.getElementById('squareBox').style.display='block';
+  document.getElementById('manualBox').style.display='none';
+  document.getElementById('formFootnote').textContent=
+    'Checkout is handled by Square — we never see or store your card details. '
+    +'Tickets are also sold at the TETWP booths at the Round-Up on September 17. '
+    +'100% of proceeds benefit local Eastern Oregon cancer organizations.';
+})();
 
 // Raffle total
 function ticketPrice(){
