@@ -32,8 +32,8 @@ body{background:var(--cream);color:var(--brown);font-family:'Libre Baskerville',
 .hero-bg{position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0,transparent 18px,rgba(200,169,122,.05) 18px,rgba(200,169,122,.05) 20px);pointer-events:none}
 .hero-bronc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(550px,85vw);opacity:.04;pointer-events:none}
 .hero-badge{display:inline-block;border:2px solid var(--tan);color:var(--tan);font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;padding:6px 20px;margin-bottom:22px;position:relative;z-index:2;animation:fadeDown .8s both}
-.hero-logo-wrap{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;animation:fadeDown .8s .1s both}
-.hero-logo-wrap::before{content:'';position:absolute;inset:-34px -46px;pointer-events:none;background:radial-gradient(ellipse 62% 68% at 50% 50%,#FFF4F8 0%,#FEE3EE 26%,#F9C2D8 45%,rgba(242,115,154,.55) 62%,rgba(232,55,106,.22) 77%,rgba(232,55,106,0) 90%)}
+.hero-logo-wrap{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;margin:10px 0;animation:fadeDown .8s .1s both}
+.hero-logo-wrap::before{content:'';position:absolute;inset:-18px -38px;pointer-events:none;border-radius:26px;background:linear-gradient(158deg,#FFFFFF 0%,#FFFAFC 42%,#FFF1F7 78%,#FEE7F1 100%);box-shadow:0 0 0 1px rgba(255,255,255,.3),0 0 52px 16px rgba(232,55,106,.42),0 0 120px 40px rgba(232,55,106,.18)}
 .hero-logo{position:relative;z-index:1;display:block;width:min(420px,80vw)}
 .hero-divider{width:100px;height:2px;background:linear-gradient(90deg,transparent,var(--pink),transparent);margin:20px auto;position:relative;z-index:2;animation:fadeDown .8s .22s both}
 .hero-date{font-family:'Oswald',sans-serif;font-size:clamp(1rem,3vw,1.25rem);color:var(--white);letter-spacing:.08em;position:relative;z-index:2;animation:fadeDown .8s .3s both}
@@ -42,9 +42,10 @@ body{background:var(--cream);color:var(--brown);font-family:'Libre Baskerville',
 .hero-deadline{font-family:'Oswald',sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tan);margin-top:20px;position:relative;z-index:2;animation:fadeDown .8s .55s both}
 /* Phones: keep the hero short enough that the raffle is visible on landing. */
 @media(max-width:600px){
-  .hero{padding:34px 20px 26px}
+  .hero{padding:34px 20px 20px}
   .hero-badge{letter-spacing:.18em;font-size:.62rem;padding:5px 12px;margin-bottom:16px}
-  .hero-logo-wrap::before{inset:-22px -20px;background:radial-gradient(ellipse 78% 62% at 50% 50%,#FFF4F8 0%,#FEE3EE 32%,#F9C2D8 52%,rgba(242,115,154,.5) 68%,rgba(232,55,106,.2) 82%,rgba(232,55,106,0) 93%)}
+  .hero-logo-wrap{margin:4px 0}
+  .hero-logo-wrap::before{inset:-14px -16px;border-radius:18px}
   .hero-logo{width:min(420px,78vw)}
   .hero-divider{margin:14px auto}
   .hero-date{font-size:1rem;margin-bottom:10px}
@@ -52,7 +53,7 @@ body{background:var(--cream);color:var(--brown);font-family:'Libre Baskerville',
   .hero-cta{align-items:stretch}
   .hero-cta .btn{padding:13px 10px;font-size:.7rem;letter-spacing:.06em;flex:1 1 0;text-align:center;display:flex;align-items:center;justify-content:center}
   .hero-cta .btn-pink{flex:1.7 1 0}
-  .hero-deadline{letter-spacing:.12em;font-size:.6rem;margin-top:14px}
+  .hero-deadline{letter-spacing:.12em;font-size:.6rem;margin-top:12px}
   .raffle{padding-top:38px}
 }
 .stat{text-align:center}
