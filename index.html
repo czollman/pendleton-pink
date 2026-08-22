@@ -173,6 +173,9 @@ input:focus,select:focus{border-color:var(--pink)}
 .form-note{font-size:.76rem;color:#8a6040;font-style:italic;margin-top:10px;line-height:1.5}
 .prize-v{margin-left:auto;font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.05em;color:var(--pink-deep);white-space:nowrap;padding-top:4px}
 .prize>div:nth-child(2){flex:1 1 auto;min-width:0}
+.prize-thumb{width:62px;height:62px;object-fit:cover;border:1px solid var(--tan-light);flex:0 0 auto;background:var(--cream);display:block}
+.prize-thumb.contain{object-fit:contain;padding:5px;background:var(--white)}
+@media(max-width:560px){.prize-thumb{width:48px;height:48px}}
 @media(max-width:560px){.prize-v{white-space:normal;text-align:right;max-width:5.2em;line-height:1.35}}
 .prize-qty{display:inline-block;background:var(--pink-pale);color:var(--pink-deep);font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:2px}
 .prize-total{margin-top:16px;padding-top:14px;border-top:2px solid var(--pink);font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
@@ -298,11 +301,11 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
     </div>
     <div class="raffle-layout">
       <div class="reveal" style="transition-delay:.1s">
-        <div class="prize"><div class="prize-n">1</div><div><div class="prize-d">Pendleton Whisky Taiga Cooler</div><div class="prize-src">Donated by Pendleton Whisky</div></div><div class="prize-v">$300 value</div></div>
-        <div class="prize"><div class="prize-n">2</div><div><div class="prize-d">Pendleton Whisky Champions Edition Bottle<br>Signed by the 2025 Round-Up Winners</div><div class="prize-src">Donated by the Pendleton Round-Up Association</div></div><div class="prize-v">$50 value</div></div>
-        <div class="prize"><div class="prize-n">3</div><div><div class="prize-d">Montana Silversmiths 20th Anniversary Buckle</div><div class="prize-src">Donated by Montana Silversmiths</div></div><div class="prize-v">$300 value</div></div>
-        <div class="prize"><div class="prize-n">4</div><div><div class="prize-d">Portland Leather Purse</div><div class="prize-src">Donated by Terri White</div></div><div class="prize-v">$132 value</div></div>
-        <div class="prize"><div class="prize-n">5</div><div><div class="prize-d">Custom Pendleton Hat Co. Hat Gift Certificate<span class="prize-qty">2 available</span></div><div class="prize-src">Donated by Pendleton Hat Co.</div></div><div class="prize-v">$500 value each</div></div>
+        <div class="prize" data-prize="cooler"><div class="prize-n">1</div><div><div class="prize-d">Pendleton Whisky Taiga Cooler</div><div class="prize-src">Donated by Pendleton Whisky</div></div><div class="prize-v">$300 value</div></div>
+        <div class="prize" data-prize="bottle"><div class="prize-n">2</div><div><div class="prize-d">Pendleton Whisky Champions Edition Bottle<br>Signed by the 2025 Round-Up Winners</div><div class="prize-src">Donated by the Pendleton Round-Up Association</div></div><div class="prize-v">$50 value</div></div>
+        <div class="prize" data-prize="buckle"><div class="prize-n">3</div><div><div class="prize-d">Montana Silversmiths 20th Anniversary Buckle</div><div class="prize-src">Donated by Montana Silversmiths</div></div><div class="prize-v">$300 value</div></div>
+        <div class="prize" data-prize="purse"><div class="prize-n">4</div><div><div class="prize-d">Portland Leather Purse</div><div class="prize-src">Donated by Terri White</div></div><div class="prize-v">$132 value</div></div>
+        <div class="prize" data-prize="hat"><div class="prize-n">5</div><div><div class="prize-d">Custom Pendleton Hat Co. Hat Gift Certificate<span class="prize-qty">2 available</span></div><div class="prize-src">Donated by Pendleton Hat Co.</div></div><div class="prize-v">$500 value each</div></div>
         <div class="prize-total">Six prizes · <strong>More than $1,780</strong> in donated value</div>
         <div class="raffle-where">
           <strong>Tickets:</strong> $5 each, or 3 for $12.<br>
@@ -650,6 +653,34 @@ function copy(t){
 
 // Amount btns
 function selAmt(b){document.querySelectorAll('.amt-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+
+/* ── RAFFLE PRIZE PHOTOS ─────────────────────────────────────────────────
+   Drop the prize images into the images/ folder and list them here. Each
+   key matches a data-prize attribute on a row in the raffle prize list.
+   Any key left out simply shows no thumbnail, so partial sets are fine.  */
+const PRIZE_IMAGES={
+  // cooler: 'images/cooler.jpg',
+  // bottle: 'images/whisky-bottle.jpg',
+  // buckle: 'images/buckle.jpg',
+  // purse:  'images/purse.jpg',
+  // A logo should be fitted whole rather than cropped square like a photo:
+  // hat:    {src:'images/pendleton-hat-co.png', contain:true},
+};
+
+(function renderPrizeImages(){
+  for(const [key,val] of Object.entries(PRIZE_IMAGES)){
+    if(!val) continue;
+    const src=typeof val==='string'?val:val.src;
+    const contain=typeof val==='object'&&val.contain;
+    if(!src) continue;
+    const row=document.querySelector('.prize[data-prize="'+key+'"]');
+    if(!row) continue;
+    const img=document.createElement('img');
+    img.className='prize-thumb'+(contain?' contain':''); img.src=src; img.loading='lazy';
+    img.alt=(row.querySelector('.prize-d')||{textContent:''}).textContent.trim();
+    row.insertBefore(img,row.children[1]);
+  }
+})();
 
 /* ── TETWP STORE PRODUCTS ────────────────────────────────────────────────
    Add the TETWP items from the Let'er Buck Store here and they render as
