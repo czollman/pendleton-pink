@@ -331,9 +331,10 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
 
         <!-- SQUARE CHECKOUT: shown only when SQUARE_RAFFLE_LINKS has entries in the script below. -->
         <div id="squareBox" style="display:none">
-          <p class="pay-line">Check out securely with Square — card, Apple Pay, and Google Pay accepted. Square emails your receipt, and we follow up with your ticket numbers before the drawing.</p>
+          <p class="pay-line">Check out securely with Square — card, Apple Pay, and Google Pay accepted.</p>
+          <p class="pay-line">Pick a bundle, then choose how many you want on the next page. Four 3-packs is 12 tickets for $48.</p>
           <div id="squareBtns" class="square-btns"></div>
-          <p class="form-note">Prefer to send it yourself? Use <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a> and put your name and ticket count in the note.</p>
+          <p class="form-note">Square emails your receipt; we follow up with your ticket numbers before the drawing. Prefer to send it yourself? Use <a href="https://www.paypal.com/ncp/payment/Z6U5YPPBCQL5J" target="_blank" rel="noopener" style="color:var(--pink-deep)">PayPal</a> or <a href="https://www.venmo.com/u/PRUToughEnoughToWearPink" target="_blank" rel="noopener" style="color:var(--pink-deep)">Venmo</a> and put your name and ticket count in the note.</p>
         </div>
 
         <!-- MANUAL PAYPAL / VENMO FLOW -->
@@ -714,8 +715,8 @@ const TETWP_PRODUCTS=[];
    primary button and any others render as secondary ones. Leave the list
    empty to keep the PayPal / Venmo flow.                                 */
 const SQUARE_RAFFLE_LINKS=[
-  // {label:'1 Ticket — $5',   url:'https://square.link/u/XXXXXXXX'},
-  // {label:'3 Tickets — $12', url:'https://square.link/u/YYYYYYYY'},
+  {label:'3 Tickets — $12', url:'https://square.link/u/bgmj032b'},
+  {label:'1 Ticket — $5',   url:'https://square.link/u/AaKny7kc'},
 ];
 
 /* Online sales end after Wednesday, September 16 2026, Pacific time
