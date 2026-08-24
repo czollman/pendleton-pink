@@ -224,8 +224,14 @@ input:focus,select:focus{border-color:var(--pink)}
 .tier-lbl{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--tan);margin-bottom:12px;border-bottom:1px solid rgba(200,169,122,.18);padding-bottom:7px}
 .chip-row{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
 .chip{background:rgba(255,255,255,.07);border:1px solid rgba(200,169,122,.22);padding:8px 16px;font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.04em;color:var(--cream)}
-.chip.gold{border-color:var(--gold);color:var(--gold)}
+.chip.platinum{border-color:rgba(255,255,255,.6);color:#FFF;background:rgba(255,255,255,.13);font-size:.9rem;padding:10px 20px}
+.chip.gold{border-color:var(--gold);color:var(--gold);font-size:.86rem;padding:9px 18px}
+.chip.silver{border-color:#B9BEC7;color:#DCE0E6}
+.chip.bronze{border-color:#B57E4D;color:#DFAF85}
+.chip.gate{border-color:var(--pink);color:var(--pink-light)}
+.chip.web{border-color:var(--pink-light);color:var(--pink-light)}
 .chip.pnw{border-color:var(--pink-light);color:var(--pink-light)}
+.chip.tbd{border-style:dashed;border-color:rgba(200,169,122,.45);color:rgba(232,213,181,.65);font-style:italic}
 
 /* CONTACT */
 .contact{background:var(--pink-pale);padding:56px 24px;text-align:center}
@@ -543,29 +549,55 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
       <div class="s-rule"></div>
       <p style="color:var(--tan-light)">This campaign works because of the incredible businesses and individuals who give year after year. Interested in sponsoring 2027?</p>
     </div>
-    <!-- TODO: these names are the 2025 roster, carried over when the heading
-         changed to 2026. Replace both tiers with the confirmed 2026 sponsors
-         before this section is shown publicly. -->
     <div class="reveal" style="transition-delay:.12s">
-      <div class="tier-lbl">Gold Sponsors</div>
+      <div class="tier-lbl">Platinum Sponsors</div>
       <div class="chip-row">
-        <div class="chip gold">Jordan Schnitzer / Harold &amp; Arlene Schnitzer CARE Foundation</div>
-        <div class="chip gold">CHI St. Anthony Hospital</div>
+        <div class="chip platinum">CHI St. Anthony Hospital</div>
+        <div class="chip platinum">Good Shepherd Health Care System</div>
+        <div class="chip platinum">Jordan Schnitzer / The Harold &amp; Arlene Schnitzer CARE Foundation</div>
+        <div class="chip platinum">Stangier Wealth Management</div>
+        <div class="chip tbd">One More To Be Announced</div>
+      </div>
+      <div class="tier-lbl">Gold Sponsor</div>
+      <div class="chip-row">
         <div class="chip gold">Toyota</div>
-        <div class="chip gold">Stangier Wealth Management</div>
+      </div>
+      <div class="tier-lbl">Silver Sponsors</div>
+      <div class="chip-row">
+        <div class="chip silver">Elkhorn Media</div>
+        <div class="chip silver">Swire Coca-Cola</div>
+      </div>
+      <div class="tier-lbl">Bronze Sponsors</div>
+      <div class="chip-row">
+        <div class="chip bronze">40 Taps</div>
+        <div class="chip bronze">Dr. Pratt Dentistry</div>
+        <div class="chip bronze">Eastern Oregon Cancer Center</div>
+        <div class="chip bronze">Pendleton Hat Company</div>
+        <div class="chip bronze">Premium Tire &amp; Lube</div>
       </div>
       <div class="tier-lbl">Pink Sponsors</div>
       <div class="chip-row">
+        <div class="chip">Altrusa</div>
+        <div class="chip">Bandit Hat Cinch Co.</div>
         <div class="chip">Banner Bank</div>
-        <div class="chip">Columbia Distributing</div>
-        <div class="chip">Pendleton Hat Company</div>
-        <div class="chip">Prodigal Son Brewery &amp; Pub</div>
-        <div class="chip">Altrusa of Pendleton</div>
-        <div class="chip">Wheatland Insurance</div>
         <div class="chip">Coldwell Banker Farley Company</div>
+        <div class="chip">Columbia Distributing</div>
+        <div class="chip">Daisy &amp; Roxy</div>
+        <div class="chip">Dave&rsquo;s Chevron</div>
+        <div class="chip">Dutch Bros Coffee</div>
         <div class="chip">Montana Silversmiths</div>
-        <div class="chip pnw">PNW Windows &amp; More</div>
         <div class="chip">Pendleton Whisky</div>
+        <div class="chip pnw">PNW Windows &amp; More, LLC</div>
+        <div class="chip">Prodigal Son</div>
+        <div class="chip">Wheatland Insurance</div>
+      </div>
+      <div class="tier-lbl">Gate Sponsor</div>
+      <div class="chip-row">
+        <div class="chip gate">Prodigal Son</div>
+      </div>
+      <div class="tier-lbl">Website Sponsor</div>
+      <div class="chip-row">
+        <div class="chip web">Casey Zollman &middot; PNW Windows and More</div>
       </div>
     </div>
     <div class="reveal" style="transition-delay:.25s;margin-top:24px">
