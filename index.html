@@ -17,47 +17,79 @@
 <meta property="og:title" content="Tough Enough To Wear Pink | Pendleton Round-Up 2026 | Raffle & Donations">
 <meta property="og:description" content="20th anniversary breast cancer fundraiser at the Pendleton Round-Up. Buy 2026 raffle tickets, donate, and shop TETWP gear. Pink Day is Thursday, September 17, 2026.">
 <meta property="og:url" content="https://pendletonpink.com/">
-<meta property="og:image" content="https://pendletonpink.com/images/tetwp-logo.png">
-<meta property="og:image:width" content="642">
-<meta property="og:image:height" content="357">
+<meta property="og:image" content="https://pendletonpink.com/images/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tough Enough To Wear Pink | Pendleton Round-Up 2026">
 <meta name="twitter:description" content="20th anniversary breast cancer fundraiser at the Pendleton Round-Up. Buy 2026 raffle tickets, donate, and shop TETWP gear.">
-<meta name="twitter:image" content="https://pendletonpink.com/images/tetwp-logo.png">
+<meta name="twitter:image" content="https://pendletonpink.com/images/og-share.jpg">
 
 <!-- Structured data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "NGO",
-  "name": "Tough Enough To Wear Pink — Pendleton Round-Up",
-  "alternateName": "TETWP Pendleton Round-Up",
-  "url": "https://pendletonpink.com/",
-  "logo": "https://pendletonpink.com/images/tetwp-logo.png",
-  "description": "Tough Enough To Wear Pink is the Pendleton Round-Up's breast cancer fundraiser, marking its 20th anniversary in 2026. Proceeds from raffle tickets, donations, and merchandise sales benefit local Eastern Oregon cancer organizations.",
-  "email": "cmwzollman@gmail.com",
-  "sameAs": [
-    "https://www.pendletonroundup.com/p/round-up/round-up/tough-enough-to-wear-pink"
-  ],
-  "event": {
-    "@type": "Event",
-    "name": "Tough Enough To Wear Pink Day at the Pendleton Round-Up",
-    "startDate": "2026-09-17",
-    "endDate": "2026-09-17",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-    "eventStatus": "https://schema.org/EventScheduled",
-    "location": {
-      "@type": "Place",
-      "name": "Pendleton Round-Up Grounds",
+  "@graph": [
+    {
+      "@type": "NGO",
+      "@id": "https://pendletonpink.com/#organization",
+      "name": "Tough Enough To Wear Pink — Pendleton Round-Up",
+      "alternateName": ["TETWP", "TETWP Pendleton Round-Up"],
+      "url": "https://pendletonpink.com/",
+      "logo": "https://pendletonpink.com/images/tetwp-logo.png",
+      "description": "Tough Enough To Wear Pink (TETWP) is the Pendleton Round-Up's breast cancer fundraiser in Pendleton, Oregon, marking its 20th anniversary in 2026. Proceeds from raffle tickets, donations, and merchandise sales benefit local Eastern Oregon cancer organizations.",
+      "email": "cmwzollman@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Pendleton",
         "addressRegion": "OR",
         "addressCountry": "US"
-      }
+      },
+      "sameAs": [
+        "https://www.pendletonroundup.com/p/round-up/round-up/tough-enough-to-wear-pink"
+      ]
     },
-    "description": "Pink Day at the 2026 Pendleton Round-Up: the 20th anniversary Tough Enough To Wear Pink raffle drawing, breast cancer fundraiser booths, and TETWP gear."
-  }
+    {
+      "@type": "WebSite",
+      "@id": "https://pendletonpink.com/#website",
+      "url": "https://pendletonpink.com/",
+      "name": "Tough Enough To Wear Pink — Pendleton Round-Up",
+      "publisher": { "@id": "https://pendletonpink.com/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pendletonpink.com/#webpage",
+      "url": "https://pendletonpink.com/",
+      "name": "Tough Enough To Wear Pink | Pendleton Round-Up 2026 | Raffle & Donations",
+      "description": "Tough Enough To Wear Pink at the Pendleton Round-Up — 20th anniversary breast cancer fundraiser. Buy 2026 raffle tickets, donate, and shop TETWP gear.",
+      "isPartOf": { "@id": "https://pendletonpink.com/#website" },
+      "about": { "@id": "https://pendletonpink.com/#organization" },
+      "primaryImageOfPage": "https://pendletonpink.com/images/og-share.jpg"
+    },
+    {
+      "@type": "Event",
+      "@id": "https://pendletonpink.com/#event",
+      "name": "Tough Enough To Wear Pink Day at the Pendleton Round-Up",
+      "startDate": "2026-09-17",
+      "endDate": "2026-09-17",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "organizer": { "@id": "https://pendletonpink.com/#organization" },
+      "location": {
+        "@type": "Place",
+        "name": "Pendleton Round-Up Grounds",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pendleton",
+          "addressRegion": "OR",
+          "addressCountry": "US"
+        }
+      },
+      "description": "Pink Day at the 2026 Pendleton Round-Up: the 20th anniversary Tough Enough To Wear Pink raffle drawing, breast cancer fundraiser booths, and TETWP gear.",
+      "image": "https://pendletonpink.com/images/og-share.jpg",
+      "url": "https://pendletonpink.com/"
+    }
+  ]
 }
 </script>
 
@@ -351,7 +383,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
   <div class="hero-bg"></div>
   <img src="images/bronc.png" class="hero-bronc" alt="" width="94" height="138">
   <h1 class="sr-only">Tough Enough To Wear Pink — Pendleton Round-Up 2026 Raffle &amp; Donations</h1>
-  <div class="hero-badge">Pendleton Round-Up · Thursday, September 17, 2026</div>
+  <div class="hero-badge">Pendleton Round-Up · Pendleton, Oregon · Thursday, September 17, 2026</div>
   <div class="hero-logo-wrap">
     <img src="images/tetwp-logo.png" alt="Tough Enough To Wear Pink — 20 Years — 2026 Pendleton Round-Up" class="hero-logo" fetchpriority="high" width="642" height="357">
   </div>
@@ -550,6 +582,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
       <p class="s-label">Our Story</p>
       <h2 class="s-title">From Las Vegas to<br><em>Pendleton — 20 Years</em></h2>
       <div class="s-rule"></div>
+      <p>The Pendleton Round-Up Tough Enough To Wear Pink (TETWP) campaign in Pendleton, Oregon celebrates its 20th anniversary in 2026.</p>
     </div>
     <div class="timeline reveal" style="transition-delay:.15s">
       <div class="tl-item">
@@ -682,7 +715,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
   <img src="images/tetwp-logo.png" alt="TETWP 2026" class="footer-logo" loading="lazy" decoding="async" width="642" height="357">
   <p class="footer-tag">Are You <span class="footer-pink">Tough Enough</span> To Wear Pink?</p>
   <p class="footer-small">
-    20th Anniversary · Pendleton Round-Up · September 17, 2026<br>
+    20th Anniversary · Pendleton Round-Up · Pendleton, Oregon · September 17, 2026<br>
     pendletonpink.com · #leterbucktetwp<br>
     100% of proceeds benefit local Eastern Oregon cancer support organizations.
   </p>
