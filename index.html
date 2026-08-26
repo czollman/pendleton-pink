@@ -176,7 +176,7 @@ input:focus,select:focus{border-color:var(--pink)}
 .prize-v{margin-left:auto;font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.05em;color:var(--pink-deep);white-space:nowrap;padding-top:4px}
 .prize>div:nth-child(2){flex:1 1 auto;min-width:0}
 .prize-thumb{width:92px;height:92px;object-fit:cover;border:1px solid var(--tan-light);flex:0 0 auto;background:var(--cream);display:block}
-.prize-thumb.contain{object-fit:contain;padding:5px;background:var(--white)}
+.prize-thumb.contain{width:auto;object-fit:contain;padding:5px;background:var(--white)}
 .prize-buy{display:inline-block;margin-top:7px;font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:var(--pink);padding:5px 12px;text-decoration:none;transition:background .15s}
 .prize-buy:hover{background:var(--pink-deep)}
 @media(max-width:560px){.prize-thumb{width:64px;height:64px}}
@@ -321,7 +321,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
         <div class="prize" data-prize="cooler"><div class="prize-n">1</div><div><div class="prize-d">Pendleton Whisky Taiga Cooler</div><div class="prize-src">Donated by Pendleton Whisky</div></div><div class="prize-v">$300 value</div></div>
         <div class="prize" data-prize="bottle"><div class="prize-n">2</div><div><div class="prize-d">Pendleton Whisky Champions Edition Bottle<br>Signed by the 2025 Round-Up Winners</div><div class="prize-src">Donated by the Pendleton Round-Up Association</div></div><div class="prize-v">$50 value</div></div>
         <div class="prize" data-prize="buckle"><div class="prize-n">3</div><div><div class="prize-d">Custom Montana Silversmiths 20th Anniversary Buckle<span class="prize-qty oak">One of a kind</span></div><div class="prize-src">Donated by Montana Silversmiths</div><div class="prize-note">The only one like it anywhere. Made for the 20th anniversary and never repeated &mdash; engraved silver scrollwork with a pink ribbon, a gold bronc rider, and &ldquo;20 Years Tough &middot; 2026 Pendleton Round-Up&rdquo; lettering.</div></div><div class="prize-v">$300 value</div></div>
-        <div class="prize" data-prize="purse"><div class="prize-n">4</div><div><div class="prize-d">Portland Leather Purse</div><div class="prize-src">Donated by Terri White</div></div><div class="prize-v">$132 value</div></div>
+        <div class="prize" data-prize="purse"><div class="prize-n">4</div><div><div class="prize-d">Portland Leather Purse</div><div class="prize-src">Donated by Terri White</div></div><div class="prize-v">$133 value</div></div>
         <div class="prize" data-prize="hat"><div class="prize-n">5</div><div><div class="prize-d">Custom Pendleton Hat Co. Hat Gift Certificate<span class="prize-qty">2 available</span></div><div class="prize-src">Donated by Pendleton Hat Co.</div></div><div class="prize-v">$500 value each</div></div>
         <div class="prize-total">Six prizes · <strong>More than $1,780</strong> in donated value</div>
         <div class="raffle-where">
@@ -689,11 +689,11 @@ function prizeName(row){
 }
 
 const PRIZE_LINKS={
-  // cooler: 'https://…square.site/product/…',
-  // bottle: '',
-  // buckle: '',
-  // purse:  '',
-  // hat:    '',
+  cooler: 'https://twetp-raffle.square.site/product/-300-pendleton-whisky-taiga-cooler/VCVYWQQQZTLAXB6KGAGWY4G6?cs=true&cst=custom',
+  bottle: 'https://twetp-raffle.square.site/product/-50-pendleton-whisky-champions-edition-bottle-signed-by-2025-round-up-winners/3WOXYKX2NIBLD5BOFTTWRS4N?cs=true&cst=custom',
+  buckle: 'https://twetp-raffle.square.site/product/-300-custom-montana-silversmiths-20th-anniversary-buckle/PNMI4U437GBUSERKN4IRAOXN?cs=true&cst=custom',
+  purse:  'https://twetp-raffle.square.site/product/-150-portland-leather-purse/KTC5ZZGTU5GXE6UATMHPQ73G?cs=true&cst=custom',
+  hat:    'https://twetp-raffle.square.site/product/-500-pendleton-hat-company-gift-certificate/OXDLW425MMS6EOVLHN26JZD4?cs=true&cst=custom',
 };
 
 (function renderPrizeLinks(){
@@ -765,7 +765,7 @@ const TETWP_PRODUCTS=[];
    as secondary ones. While this list is empty the section shows the
    "sales open soon" notice instead.                                      */
 const SQUARE_RAFFLE_LINKS=[
-  // {label:'Buy Raffle Tickets', url:'https://….square.site/'},
+  {label:'Buy Raffle Tickets', url:'https://twetp-raffle.square.site/'},
 ];
 
 /* Online sales end after Wednesday, September 16 2026, Pacific time
