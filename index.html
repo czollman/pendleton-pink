@@ -218,6 +218,20 @@ input:focus,select:focus{border-color:var(--pink)}
 .hashtag{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(2rem,7vw,5rem);color:var(--white);letter-spacing:.05em}
 .hashtag-sub{font-family:'Libre Baskerville',serif;font-style:italic;color:rgba(255,255,255,.65);margin-top:10px}
 
+/* GOAL COUNTER */
+.goal-strip{background:var(--black);padding:56px 24px;text-align:center}
+.goal-inner{max-width:640px;margin:0 auto}
+.goal-label{font-family:'Oswald',sans-serif;font-size:.63rem;letter-spacing:.4em;text-transform:uppercase;color:var(--pink-light);margin-bottom:18px}
+.goal-numbers{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:8px;margin-top:16px}
+.goal-raised{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,6vw,3.2rem);color:var(--white);line-height:1}
+.goal-of{font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan)}
+.goal-target{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.3rem,3.5vw,1.8rem);color:var(--tan-light)}
+.goal-bar-track{width:100%;height:18px;background:rgba(255,255,255,.08);border:1px solid rgba(200,169,122,.3);border-radius:99px;overflow:hidden;margin-top:6px}
+.goal-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--pink-deep),var(--pink),var(--pink-light));border-radius:99px;transition:width 1.2s ease}
+.goal-cta{color:var(--tan-light);margin-top:22px;font-size:.95rem}
+.goal-cta a{color:var(--pink-light);text-decoration:underline;text-underline-offset:3px}
+.goal-cta a:hover{color:var(--pink)}
+
 /* SPONSORS */
 .sponsors{background:var(--brown);padding:60px 24px}
 .sponsors .s-title{color:var(--cream)}
@@ -392,7 +406,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
       <p class="s-label">Make a Difference</p>
       <h2 class="s-title">Donate to the<br><em>20th Anniversary Campaign</em></h2>
       <div class="s-rule"></div>
-      <p>Help us beat the $51,000 record in 2026. Send via PayPal or Venmo — add "TETWP 2026" in your note. <strong>Every dollar stays in Eastern Oregon.</strong></p>
+      <p>Help us reach our $100,000 campaign goal for 2026. It's our 20th anniversary — nearly double any year we've ever raised — and every gift gets us closer. Send via PayPal or Venmo — add "TETWP 2026" in your note. <strong>Every dollar stays in Eastern Oregon.</strong></p>
     </div>
     <div class="donate-grid">
       <div class="pay-block reveal" style="transition-delay:.1s">
@@ -619,6 +633,20 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
   </div>
 </div>
 
+<!-- GOAL COUNTER -->
+<div class="goal-strip reveal">
+  <div class="goal-inner">
+    <p class="goal-label">2026 · 20th Anniversary Goal</p>
+    <div class="goal-numbers">
+      <span class="goal-raised" id="goalRaised">$0</span>
+      <span class="goal-of">raised toward</span>
+      <span class="goal-target">$100,000</span>
+    </div>
+    <div class="goal-bar-track"><div class="goal-bar-fill" id="goalBarFill"></div></div>
+    <p class="goal-cta">We've never raised more than $51,000 in a single year — this year we're going for six figures. Help us get there: <a href="#raffle">buy raffle tickets</a> or <a href="#donate">donate now</a>.</p>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <img src="images/tetwp-logo.png" alt="TETWP 2026" class="footer-logo" loading="lazy" decoding="async" width="642" height="357">
@@ -779,6 +807,23 @@ const SQUARE_RAFFLE_LINKS=[
    (Pendleton is UTC-7 in September). Once this passes, the purchase form is
    replaced with the in-person notice. To reopen sales, push the date out. */
 const ONLINE_SALES_CLOSE=new Date('2026-09-17T00:00:00-07:00');
+
+/* ── CAMPAIGN GOAL COUNTER ────────────────────────────────────────────────
+   Update CAMPAIGN_RAISED by hand as raffle sales, sponsorships, and
+   donations come in — this site has no live link to Square or PayPal, so
+   nothing updates this automatically. CAMPAIGN_GOAL is the $100,000 target
+   for the 20th anniversary.                                              */
+const CAMPAIGN_RAISED=0;
+const CAMPAIGN_GOAL=100000;
+
+(function renderGoalCounter(){
+  const raisedEl=document.getElementById('goalRaised');
+  const fillEl=document.getElementById('goalBarFill');
+  if(!raisedEl||!fillEl) return;
+  raisedEl.textContent='$'+CAMPAIGN_RAISED.toLocaleString('en-US');
+  const pct=Math.max(0,Math.min(100,(CAMPAIGN_RAISED/CAMPAIGN_GOAL)*100));
+  fillEl.style.width=pct+'%';
+})();
 
 (function initCheckout(){
   const closed=new Date()>=ONLINE_SALES_CLOSE;
