@@ -14,6 +14,7 @@ Add the file, then uncomment and correct the matching line in the
 | `buckle` | Montana Silversmiths 20th Anniversary Buckle    |
 | `purse`  | Portland Leather Purse                          |
 | `hat`    | Pendleton Hat Co. gift certificates             |
+| `blanket`| Pink Pendleton Woolen Mills blanket             |
 
 Thumbnails render at 62x62 (48x48 on phones), cropped to a square, so
 roughly square source images look best. Anything from about 200px up is
