@@ -113,7 +113,19 @@ body{background:var(--cream);color:var(--brown);font-family:'Libre Baskerville',
 .nav-links{display:flex;gap:20px;list-style:none}
 .nav-links a{font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tan-light);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--pink)}
-@media(max-width:600px){.nav-links{display:none}}
+@media(max-width:600px){
+  .nav{padding:8px 12px}
+  .nav-logo{height:26px}
+  .nav-links{gap:9px}
+  .nav-links a{font-size:.58rem;letter-spacing:.05em}
+}
+@media(max-width:360px){.nav-links{gap:7px}.nav-links a{font-size:.54rem;letter-spacing:.02em}}
+/* Below ~345px the five links no longer fit beside the logo, so give them their own row. */
+@media(max-width:344px){
+  .nav{flex-wrap:wrap;justify-content:center;row-gap:5px}
+  .nav-links{width:100%;justify-content:center;gap:8px}
+  .nav-links a{font-size:.55rem;letter-spacing:.03em}
+}
 
 /* HERO */
 .hero{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:52px 24px 40px;background:var(--black);overflow:hidden}
@@ -347,7 +359,7 @@ a.chip:hover{transform:translateY(-2px);filter:brightness(1.18)}
 
 /* FOOTER */
 footer{background:var(--black);padding:36px 24px;text-align:center}
-.footer-logo{height:54px;width:auto;margin:0 auto 14px;display:block;opacity:.85}
+.footer-logo{height:54px;width:auto;margin:0 auto 14px;display:block}
 .footer-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;color:var(--tan);margin-bottom:12px}
 .footer-small{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,169,122,.35);line-height:1.9}
 .footer-pink{color:var(--pink)}
@@ -385,7 +397,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <img src="images/tetwp-logo.png" alt="TETWP 2026" class="nav-logo" width="642" height="357">
+  <img src="images/tetwp-logo-light.png" alt="TETWP 2026" class="nav-logo" width="642" height="357">
   <ul class="nav-links">
     <li><a href="#raffle">Raffle</a></li>
     <li><a href="#donate">Donate</a></li>
@@ -751,7 +763,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
 
 <!-- FOOTER -->
 <footer>
-  <img src="images/tetwp-logo.png" alt="TETWP 2026" class="footer-logo" loading="lazy" decoding="async" width="642" height="357">
+  <img src="images/tetwp-logo-light.png" alt="TETWP 2026" class="footer-logo" loading="lazy" decoding="async" width="642" height="357">
   <p class="footer-tag">Are You <span class="footer-pink">Tough Enough</span> To Wear Pink?</p>
   <p class="footer-small">
     20th Anniversary · Pendleton Round-Up · Pendleton, Oregon · September 17, 2026<br>
