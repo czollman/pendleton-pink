@@ -335,6 +335,9 @@ input:focus,select:focus{border-color:var(--pink)}
 .chip.gate{border-color:var(--pink);color:var(--pink-light)}
 .chip.web{border-color:var(--pink-light);color:var(--pink-light)}
 .chip.tbd{border-style:dashed;border-color:rgba(200,169,122,.45);color:rgba(232,213,181,.65);font-style:italic}
+/* Sponsor chips with a website become links; brightness keeps each tier's own palette. */
+a.chip{text-decoration:none;transition:transform .15s ease,filter .15s ease}
+a.chip:hover{transform:translateY(-2px);filter:brightness(1.18)}
 
 /* CONTACT */
 .contact{background:var(--pink-pale);padding:56px 24px;text-align:center}
@@ -656,13 +659,15 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
       <p style="color:var(--tan-light)">This campaign works because of the incredible businesses and individuals who give year after year. Interested in sponsoring 2027?</p>
     </div>
     <div class="reveal" style="transition-delay:.12s">
+      <!-- A sponsor with a website becomes <a class="chip ..." href="..." target="_blank"
+           rel="noopener">Name</a>; the rest stay plain divs. -->
       <div class="tier-lbl">Platinum Sponsors</div>
       <div class="chip-row">
-        <div class="chip platinum">CHI St. Anthony Hospital</div>
-        <div class="chip platinum">Good Shepherd Health Care System</div>
+        <a class="chip platinum" href="https://www.sahpendleton.org/" target="_blank" rel="noopener">CHI St. Anthony Hospital</a>
+        <a class="chip platinum" href="https://www.gshealth.org/" target="_blank" rel="noopener">Good Shepherd Health Care System</a>
         <div class="chip platinum">Jordan Schnitzer / The Harold &amp; Arlene Schnitzer CARE Foundation</div>
         <div class="chip platinum">Quality Blasting &amp; Drilling</div>
-        <div class="chip platinum">Stangier Wealth Management</div>
+        <a class="chip platinum" href="https://www.stangierwealthmanagement.com/" target="_blank" rel="noopener">Stangier Wealth Management</a>
       </div>
       <div class="tier-lbl">Diamond Sponsor</div>
       <div class="chip-row">
