@@ -100,6 +100,10 @@
   --pink:#E8376A; --pink-light:#F2739A; --pink-pale:#FDE8EF; --pink-deep:#B01D49;
   --cream:#FDF6EE; --brown:#3D2010; --tan:#C8A97A; --tan-light:#E8D5B5;
   --black:#1A0A04; --white:#FFFFFF; --gold:#C8952A;
+  /* Accessibility tokens. --pink-cta backs white text (white on --pink is only 4.05:1);
+     --tan-ink is tan dark enough to read on light backgrounds. Do not swap these into
+     pink-on-dark or tan-on-dark spots — plain --pink/--tan are correct there. */
+  --pink-cta:#D62A5C; --tan-ink:#8A6733;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -166,7 +170,7 @@ body{background:var(--cream);color:var(--brown);font-family:'Libre Baskerville',
 
 /* BUTTONS */
 .btn{font-family:'Oswald',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:.15em;text-transform:uppercase;padding:15px 36px;text-decoration:none;display:inline-block;transition:all .18s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
-.btn-pink{background:var(--pink);color:var(--white);border:none;cursor:pointer}
+.btn-pink{background:var(--pink-cta);color:var(--white);border:none;cursor:pointer}
 .btn-pink:hover{background:var(--pink-deep);transform:translateY(-2px)}
 .btn-outline{background:transparent;color:var(--tan-light);border:2px solid var(--tan)}
 .btn-outline:hover{border-color:var(--pink-light);color:var(--pink-light);transform:translateY(-2px)}
@@ -209,7 +213,7 @@ p{line-height:1.75;margin-bottom:14px;color:#5a3520}
 .yr{font-family:'Oswald',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--tan);margin-bottom:4px}
 .amt{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--cream)}
 .yr-card.rec .amt{color:var(--pink-light)}
-.rec-tag{display:inline-block;background:var(--pink);color:var(--white);font-family:'Oswald',sans-serif;font-size:.48rem;letter-spacing:.18em;padding:2px 6px;margin-top:4px}
+.rec-tag{display:inline-block;background:var(--pink-cta);color:var(--white);font-family:'Oswald',sans-serif;font-size:.48rem;letter-spacing:.18em;padding:2px 6px;margin-top:4px}
 .total-callout{background:rgba(232,55,106,.15);border:1px solid var(--pink);padding:24px;text-align:center;margin-top:32px}
 .total-callout .big{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:700;color:var(--pink-light);line-height:1}
 .total-callout .lbl{font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--tan);margin-top:6px}
@@ -251,7 +255,7 @@ p{line-height:1.75;margin-bottom:14px;color:#5a3520}
 .handle-hint{font-family:'Oswald',sans-serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tan);text-align:center;margin-bottom:18px}
 .amt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
 .amt-btn{background:var(--cream);border:2px solid var(--tan-light);font-family:'Oswald',sans-serif;font-weight:600;font-size:.92rem;color:var(--brown);padding:10px 4px;cursor:pointer;transition:all .15s;text-align:center}
-.amt-btn:hover,.amt-btn.on{background:var(--pink);border-color:var(--pink);color:var(--white)}
+.amt-btn:hover,.amt-btn.on{background:var(--pink-cta);border-color:var(--pink-cta);color:var(--white)}
 .qr-box{width:148px;height:148px;background:var(--cream);border:2px dashed var(--tan);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Oswald',sans-serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tan);text-align:center;gap:6px}
 
 /* RAFFLE */
@@ -262,14 +266,14 @@ p{line-height:1.75;margin-bottom:14px;color:#5a3520}
 .prize:last-child{border-bottom:none}
 .prize-n{font-family:'Playfair Display',serif;font-weight:700;font-size:1.7rem;color:var(--pink);line-height:1;min-width:34px}
 .prize-d{font-family:'Oswald',sans-serif;font-size:.88rem;letter-spacing:.04em;color:var(--brown);padding-top:3px}
-.prize-src{font-size:.7rem;letter-spacing:.1em;color:var(--tan);margin-top:2px;font-family:'Oswald',sans-serif}
+.prize-src{font-size:.7rem;letter-spacing:.1em;color:var(--tan-ink);margin-top:2px;font-family:'Oswald',sans-serif}
 .raffle-form{background:var(--pink-pale);padding:30px 26px;border-top:4px solid var(--pink)}
 .form-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brown);margin-bottom:20px}
 .form-group{margin-bottom:13px}
 label{display:block;font-family:'Oswald',sans-serif;font-size:.63rem;letter-spacing:.25em;text-transform:uppercase;color:var(--brown);margin-bottom:5px}
 input,select{width:100%;padding:11px 13px;border:1px solid var(--tan-light);background:var(--white);font-family:'Libre Baskerville',serif;font-size:.92rem;color:var(--brown);outline:none;transition:border-color .2s}
 input:focus,select:focus{border-color:var(--pink)}
-.ticket-price-tag{background:var(--pink);color:var(--white);font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.15em;padding:6px 14px;margin-bottom:14px;display:inline-block}
+.ticket-price-tag{background:var(--pink-cta);color:var(--white);font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.15em;padding:6px 14px;margin-bottom:14px;display:inline-block}
 .total-box{background:var(--white);border:2px solid var(--pink);padding:13px;text-align:center;margin-bottom:16px}
 .total-lbl{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--tan)}
 .total-amt{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:var(--pink)}
@@ -278,7 +282,7 @@ input:focus,select:focus{border-color:var(--pink)}
 .prize>div:nth-child(2){flex:1 1 auto;min-width:0}
 .prize-thumb{width:92px;height:92px;object-fit:cover;border:1px solid var(--tan-light);flex:0 0 auto;background:var(--cream);display:block}
 .prize-thumb.contain{width:auto;object-fit:contain;padding:5px;background:var(--white)}
-.prize-buy{display:inline-block;margin-top:7px;font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:var(--pink);padding:5px 12px;text-decoration:none;transition:background .15s}
+.prize-buy{display:inline-block;margin-top:7px;font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:var(--pink-cta);padding:5px 12px;text-decoration:none;transition:background .15s}
 .prize-buy:hover{background:var(--pink-deep)}
 @media(max-width:560px){.prize-thumb{width:64px;height:64px}}
 @media(max-width:560px){.prize-v{white-space:normal;text-align:right;max-width:5.2em;line-height:1.35}}
@@ -361,7 +365,7 @@ a.chip:hover{transform:translateY(-2px);filter:brightness(1.18)}
 footer{background:var(--black);padding:36px 24px;text-align:center}
 .footer-logo{height:54px;width:auto;margin:0 auto 14px;display:block}
 .footer-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;color:var(--tan);margin-bottom:12px}
-.footer-small{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,169,122,.35);line-height:1.9}
+.footer-small{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,169,122,.7);line-height:1.9}
 .footer-pink{color:var(--pink)}
 
 /* REVEAL */
@@ -369,7 +373,7 @@ footer{background:var(--black);padding:36px 24px;text-align:center}
 .reveal.on{opacity:1;transform:translateY(0)}
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--pink);color:var(--white);font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.2em;padding:10px 28px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;text-transform:uppercase}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--pink-cta);color:var(--white);font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.2em;padding:10px 28px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;text-transform:uppercase}
 .toast.show{opacity:1}
 
 /* ANIMATIONS */
