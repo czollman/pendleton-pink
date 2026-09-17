@@ -835,12 +835,15 @@ function prizeName(row){
 }
 
 const PRIZE_LINKS={
-  cooler: 'https://twetp-raffle.square.site/product/-300-pendleton-whisky-taiga-cooler/VCVYWQQQZTLAXB6KGAGWY4G6?cs=true&cst=custom',
-  bottle: 'https://twetp-raffle.square.site/product/-50-pendleton-whisky-champions-edition-bottle-signed-by-2025-round-up-winners/3WOXYKX2NIBLD5BOFTTWRS4N?cs=true&cst=custom',
-  buckle: 'https://twetp-raffle.square.site/product/-300-custom-montana-silversmiths-20th-anniversary-buckle/PNMI4U437GBUSERKN4IRAOXN?cs=true&cst=custom',
-  purse:  'https://twetp-raffle.square.site/product/-150-portland-leather-purse/KTC5ZZGTU5GXE6UATMHPQ73G?cs=true&cst=custom',
-  hat:    'https://twetp-raffle.square.site/product/-500-pendleton-hat-company-gift-certificate/OXDLW425MMS6EOVLHN26JZD4?cs=true&cst=custom',
-  blanket:'https://twetp-raffle.square.site/product/-279-pink-pendleton-woolen-mills-blanket/HJBGA5LA4J2VUQ6JYFHPTBDN?cs=true&cst=custom',
+  // Online raffle sales have closed; leaving every key blank removes the
+  // "Buy tickets" links from the prize list. Restore the Square product
+  // URLs here if online sales ever reopen.
+  cooler: '',
+  bottle: '',
+  buckle: '',
+  purse:  '',
+  hat:    '',
+  blanket:'',
 };
 
 (function renderPrizeLinks(){
@@ -920,7 +923,9 @@ const TETWP_PRODUCTS=[
    as secondary ones. While this list is empty the section shows the
    "sales open soon" notice instead.                                      */
 const SQUARE_RAFFLE_LINKS=[
-  {label:'Buy Raffle Tickets', url:'https://twetp-raffle.square.site/'},
+  // Online raffle sales have closed; leaving this empty removes the Square
+  // checkout button and shows the "sales closed" notice instead. Add an
+  // entry back here if online sales ever reopen.
 ];
 
 /* Online sales end after Wednesday, September 16 2026, Pacific time
